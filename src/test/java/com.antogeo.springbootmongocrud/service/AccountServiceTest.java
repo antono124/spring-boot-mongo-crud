@@ -8,12 +8,12 @@ import org.junit.runner.RunWith;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import javax.swing.text.html.Option;
 import java.util.Optional;
 
 import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @EnableConfigurationProperties
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -25,7 +25,7 @@ public class AccountServiceTest {
 
     @Before
     public void setup() {
-        accountRepository = mock(AccountRepository.class);
+        accountRepository = spy(AccountRepository.class);
         subject = new AccountServiceImpl(accountRepository);
     }
 
@@ -36,15 +36,23 @@ public class AccountServiceTest {
 
         // When
         subject.saveAccount(account);
+
+        // Then
+        verify(accountRepository, times(1)).save(account);
     }
 
     @Test
     public void shouldDeleteAccount(){
         // Given
-        Account account = new Account("test", "test@gmail.com", "Tom", 20);
+        String id = "test2";
+        Account account = new Account(id, "test@gmail.com", "Tom", 20);
+        when(accountRepository.findById(id)).thenReturn(Optional.of(account));
 
         // When
-        subject.deleteAccount(account);
+        subject.deleteAccount(id);
+
+        // Then
+        verify(accountRepository, times(1)).delete(account);
     }
 
     @Test

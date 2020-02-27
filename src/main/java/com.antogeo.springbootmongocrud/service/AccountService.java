@@ -10,6 +10,6 @@ public interface AccountService {
 
     Optional<Account> findById(String id);
 
-    void deleteAccount(Account account);
+    void deleteAccount(String id);
 
 }

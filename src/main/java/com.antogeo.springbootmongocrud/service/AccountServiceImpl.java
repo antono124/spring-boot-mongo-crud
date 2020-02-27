@@ -26,7 +26,8 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public void deleteAccount(Account account) {
-        repository.delete(account);
+    public void deleteAccount(String id) {
+        Optional<Account> account = findById(id);
+        account.ifPresent(account1 -> repository.delete(account1));
     }
 }
