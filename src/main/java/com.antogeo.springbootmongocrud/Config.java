@@ -15,6 +15,6 @@ public class Config {
 
     @Bean
     public MongoTemplate mongoTemplate() throws Exception {
-        return new MongoTemplate(mongo(), "db");
+        return new MongoTemplate(mongo(), "spring_node_crud_db");
     }
 }
