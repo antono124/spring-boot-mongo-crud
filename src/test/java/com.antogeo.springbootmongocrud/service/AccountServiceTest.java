@@ -8,7 +8,6 @@ import org.junit.runner.RunWith;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import javax.swing.text.html.Option;
 import java.util.Optional;
 
 import static org.junit.Assert.*;
